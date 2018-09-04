@@ -45,6 +45,10 @@ const server = http.createServer( (req,res) => {
   const path = parsedURL.pathname;
   const trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
+  // Get the HTTP Method
+  const method = req.method.toUpperCase();
+
+
   // Send the response
   const parsedResponse = (`Hello, here are your request details:
 
@@ -62,7 +66,8 @@ const server = http.createServer( (req,res) => {
   url.toString(): ${parsedURL.toString()}
 
   path..........: ${path}
-  trimmedPath...: ${trimmedPath}\n`);
+  trimmedPath...: ${trimmedPath}
+  method........: ${method}\n`);
 
   // res.end(`Hello, your URL was: ${parsedURL.toString()}\n`);
   res.end(parsedResponse);
