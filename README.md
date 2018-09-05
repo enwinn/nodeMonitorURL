@@ -17,3 +17,5 @@ RESTful API for an uptime monitoring application for NMC course
    - Checks should run once a minute
    - Send SMS on detected state change, e.g. up to down or down to up when compared to the prior check. If no change, do nothing.
 
+## VS Code NodeJS Debugging Terminal Output
+![WHATWG URL Response Details](./images/WHATWG_URL_Response_Details.png "WHATWG URL Response Details")
