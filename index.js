@@ -10,7 +10,7 @@ const StringDecoder = require('string_decoder').StringDecoder;
 
 // The server should respond to all requests with a string
 const server = http.createServer( (req,res) => {
-  // req is an http.IncomingMessage, whcih is a Readable Stream
+  // req is an http.IncomingMessage, which is a Readable Stream
   // res is and http.ServerResponse, which is a Writeable Stream
 
   // Figuring out the user:password URL details
