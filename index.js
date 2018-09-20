@@ -5,21 +5,40 @@
 
 // Dependencies
 const http = require('http');
+const https = require('https');
 const { URL, URLSearchParams } = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
+const fs = require('fs');
 
-// The server should respond to all requests with a string
-const server = http.createServer( (req,res) => {
-  // req is an http.IncomingMessage, which is a Readable Stream
-  // res is and http.ServerResponse, which is a Writeable Stream
+// Instantiating the HTTP server
+const httpServer = http.createServer( (req,res) => {
+  unifiedServer(req,res);
+});
 
-  // Figuring out the user:password URL details
-  // ref: https://stackoverflow.com/questions/48196706/new-url-whatwg-url-api?noredirect=1
-  // ref: https://github.com/JoshuaWise/request-target
-  // ref: https://stackoverflow.com/questions/5951552/basic-http-authentication-in-node-js
-  // test: curl "localhost:3000/fubar/showMe.aspx?checkName=check#hash"
-  // test: curl "http://EarlFlynn:SwashBuckler@localhost:3000/abc/xyz?foo=bar&snide=sarcastic&Blackfly=eAirRiffic#hash"
+// Start the HTTP server and listen on the configuration mode port
+httpServer.listen(config.httpPort, () => {
+  console.log(`The HTTP server is listening on port ${config.httpPort} in ${config.envName} mode`);
+});
+
+// Set the HTTPS config options
+const httpsServerOptions= {
+  'key' : fs.readFileSync('./https/key.pem'),
+  'cert' : fs.readFileSync('./https/cert.pem')
+}
+
+// Instantiate the HTTPS server
+const httpsServer = https.createServer( httpsServerOptions, (req,res) => {
+  unifiedServer(req,res);
+});
+
+// Start the HTTPS server and listen on the configuration mode port
+httpsServer.listen(config.httpsPort, () => {
+  console.log(`The HTTPS server is listening on port ${config.httpsPort} in ${config.envName} mode`);
+});
+
+// Unified http and https functionality
+const unifiedServer = (req,res) => {
 
   // Check for authorization header content
   function buildUri() {
@@ -53,11 +72,6 @@ const server = http.createServer( (req,res) => {
 
   // Get the HTTP Method
   const method = req.method.toUpperCase();
-
-  //Iterate the search parameters to the console for sanity check.
-  // for (let p of searchParams) {
-  //   console.log(p);
-  // }
 
   // Get the headers as an object
   const headers = req.headers;
@@ -130,12 +144,7 @@ const server = http.createServer( (req,res) => {
 
     });
   });
-});
-
-// Start the server and listen on configuration port
-server.listen(config.port, () => {
-  console.log(`The server is listening on port ${config.port} in ${config.envName} mode`);
-});
+};
 
 // Define the handlers
 const handlers = {};
