@@ -60,7 +60,7 @@ const parsedURL = new URL(req.url, baseURL);
 const searchParams = new URLSearchParams(parsedURL.searchParams);
 ```
 
-The WHATWG URL <span style="color:green;">searchParams</span> object is synonomous to the Legacy URL <span style="color:green;">queryStringObject</span> object based on the two code blocks above.
+The WHATWG URL ```searchParams``` object is synonomous to the Legacy URL ```queryStringObject``` object based on the two code blocks above.
 
 
 ![WHATWG URL searchParams](./WHATWG_URL_searchParams.png "WHATWG URL searchParams code exmaple")
