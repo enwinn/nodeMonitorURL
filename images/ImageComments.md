@@ -15,23 +15,23 @@ But it doesn't do a good job about how to use it with an HTTP Request so you can
 
 In the image below, you can see the following:
 * Line 8 is accessing the WHATWG URL and URLSearchParams classes from the built-in url module
-* Line 21 is a function that builds a URL string similar to document example above and pass to the WHATWG URL API constructor on line 41.
-  * Line 22 checks to see if there is a headers object and if it includes an authorization header.
-  * Line 23 grabs just the auth header like this:
-    * ```header="Basic RWxsaW90R291bGQ6U3VwZXJTZWNyZXRQYXNzQHdvcmQ="```
-  * Line 24 splits the _header_ value on whitespace and pops off the last value which is the Base65 encoded authorization token:
-    * ```token="RWxsaW90R291bGQ6U3VwZXJTZWNyZXRQYXNzQHdvcmQ="```
-  * Line 25 will base64 decode the value in token to a string like this:
-    * ```auth="ElliotGould:SuperSecretPass@word"```
-  * Line 26 will split auth into parts:
-    * ```parts=Array(2) ["ElliotGould", "SuperSecretPass@word"]```
-  * Line 27 grabs just the username:
-    * ```username="ElliotGould"```
-  * Line 28 grabs just the password:
-    * ```password="SuperSecretPass@word"```
-  * Line 29-31 is a console debug statement to display the results of parsing the incoming auth header (if present).
-  * Line 32 builds the URL string the WHATWG URL API constructor is expecting (if there is an auth header)
-  * Or Line 35 builds the URL string the WHATWG URL API constructor is expecting (if there is no auth header)
+* Line 21 is a function that builds a URL string similar to the Node.js document example above which will then be passed to the WHATWG URL API constructor on line 41.
+  * Line 22 checks to see if there is a headers object and if it includes an authorization header. If so...
+    * Line 23 grabs just the auth header like this:
+      * ```header="Basic RWxsaW90R291bGQ6U3VwZXJTZWNyZXRQYXNzQHdvcmQ="```
+    * Line 24 splits the ```header``` value on whitespace and pops off the last value which is the Base65 encoded authorization token:
+      * ```token="RWxsaW90R291bGQ6U3VwZXJTZWNyZXRQYXNzQHdvcmQ="```
+    * Line 25 will base64 decode the value in token to a string like this:
+      * ```auth="ElliotGould:SuperSecretPass@word"```
+    * Line 26 will split auth into parts:
+      * ```parts=Array(2) ["ElliotGould", "SuperSecretPass@word"]```
+    * Line 27 grabs just the username:
+      * ```username="ElliotGould"```
+    * Line 28 grabs just the password:
+      * ```password="SuperSecretPass@word"```
+    * Line 29-31 is a console debug statement to display the results of parsing the incoming auth header (if present).
+    * Line 32 builds the URL string the WHATWG URL API constructor is expecting (if there is an auth header)
+  * Line 35 builds the URL string the WHATWG URL API constructor is expecting (if there is no auth header)
 * Line 40 stores the output of the buildUri() function:
 * Line 41 is the WHATWG URL constructor and will create a URL object (parsedURL) from the inputs:
   * ```req.url = "/sample/?vscodeDebugConfigs=rock%21"```
