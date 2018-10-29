@@ -19,3 +19,14 @@ RESTful API for an uptime monitoring application for NMC course
 
 ## VS Code NodeJS Debugging Terminal Output
 ![WHATWG URL Response Details](./images/WHATWG_URL_Response_Details.png "WHATWG URL Response Details")
+
+## Example test URLs:
+NOTE: Run with browser's web developer tools turned on
+
+``` html
+http://localhost:3000/
+http://localhost:3000/foo
+http://localhost:3000/foo/
+http://localhost:3000/ping
+http://localhost:3000/ping/
+```
