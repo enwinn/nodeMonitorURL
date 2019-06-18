@@ -115,7 +115,8 @@ const unifiedServer = (req,res) => {
       res.end(payloadString);
 
       // Populate the console content
-      const parsedResponse = (`Hello, here are your request details:
+      let nowDate = new Date();
+      const parsedResponse = (`Hello, here are your ${nowDate} request details:
 
       parsedURL.hash.........: ${parsedURL.hash}
       parsedURL.host.........: ${parsedURL.host}
